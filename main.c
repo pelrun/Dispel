@@ -13,13 +13,13 @@
 
 void usage(void)
 {
-	printf("\nDisPel v0.99 by James Churchill of Naruto (C)2001\n"
-		"65816/SMC Disassembler\n"
+	printf("\nDisPel v1 by James Churchill/pelrun (C)2001-2011\n"
+		"65816/SNES Disassembler\n"
 		"Usage: dispel [-n] [-t] [-h] [-l] [-s] [-i] [-a] [-x] [-e] [-p]\n"
 		"              [-b <bank>|-r <startaddr>-<endaddr>] [-g <origin>]\n"
 		"              [-d <width>] [-o <outfile>] <infile>\n\n"
 		"Options: (numbers are hex-only, no prefixes)\n"
-		" -n                Don't skip SMC header\n"
+		" -n                Skip 0x200 byte SMC header\n"
 		" -t                Don't output addresses/hex dump.\n"
 		" -h/-l             Force HiROM/LoROM memory mapping.\n"
 		" -s/-i             Force enable/disable shadow ROM addresses (see readme.)\n"
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 	char infile[BUFSIZ],outfile[BUFSIZ],inst[521];
 	unsigned char dmem[4],flag=0,*data;
 	unsigned long len,pos=0,origin=0x1000000,start=0,end=0,rpos;
-	unsigned char opt,skip=1,hirom=2,shadow=2,bound=1,tsrc=0;
+	unsigned char opt,skip=0,hirom=2,shadow=2,bound=1,tsrc=0;
 	unsigned int offset,bank=0x100,i,tmp,dwidth=0;
 	int hiscore,loscore;
 
@@ -168,7 +168,7 @@ int main(int argc, char *argv[])
 		switch(opt)
 		{
 		case 'n':
-			skip = 0;
+			skip = 1;
 			break;
 		case 't':
 			tsrc |= 1;
