@@ -52,8 +52,8 @@ True SNES addressing
 
 Now you no longer need to worry about converting to-from LoROM addresses to
 disassemble the code you want - just enter the SNES bank/addresses you want,
-and DisPel does the conversion automatically. The SMC header is also
-automatically ignored, unless disabled with the "-n" option.
+and DisPel does the conversion automatically. If the ROM has an SMC header
+then skip it with the "-n" option.
 
 And now that you can select any section of the rom to disassemble, you don't
 have to worry about a 20MB+ file containing "disassembled" graphics data,
@@ -76,10 +76,10 @@ You can disassemble a single bank using the "-b" option.
 
 e.g.
 
-dispel -b 1D rom.smc
+dispel -b 1D rom.bin
  Will disassemble from $1D8000 to $1DFFFF.
 
-dispel -b 1D -h rom.smc
+dispel -b 1D -h rom.bin
  Will disassemble from $1D0000 to $1DFFFF.
 
 Address ranges can be specified using the "-r" option. If the end address is
@@ -88,11 +88,11 @@ of the file.
 
 e.g.
 
-dispel -r 58600-79700 rom.smc
+dispel -r 58600-79700 rom.bin
  Will disassemble the range $58600 to $79700... only the valid LoROM banks,
  of course :)
 
-dispel -r 58600 rom.smc
+dispel -r 58600 rom.bin
  Will disassemble from $58600 onwards.
 
 
@@ -186,16 +186,16 @@ v0.95 update: FastROM is detected automatically. You can force enable/disable it
 
 e.g.
 
-dispel -bank 02 -s rom.smc
+dispel -b 02 -s rom.bin
  Will disassemble bank 02 as bank 82.
 
-dispel -bank 82 rom.smc
+dispel -b 82 rom.bin
  Identical to above.
 
-dispel -r 20000-2FFFF -s rom.smc
+dispel -r 20000-2FFFF -s rom.bin
  Will disassemble the region $20000-$2FFFF as $820000-$82FFFF.
 
-dispel -r 820000-82FFFF rom.smc
+dispel -r 820000-82FFFF rom.bin
  Same as above.
 
 
@@ -220,7 +220,7 @@ does anyway. Otherwise, don't worry about it.
 
 e.g.
 
-dispel -b 0 -g 30000 rom.smc
+dispel -b 0 -g 30000 rom.bin
 
 Disassemble LoROM bank 0 ($8000-$FFFF) as if it was really at $30000-$37FFF.
 
