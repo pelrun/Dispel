@@ -237,22 +237,24 @@ This will help show where the subroutines start/end in the code.
 Usage
 -----
 
-dispel [-n] [-h] [-s] [-a] [-x] [-d]
-       [-b <bank>|-r <startaddr>-<endaddr>] [-g <origin>]
-       [-o <outfile>] <infile>
-
+dispel [-n] [-t] [-h] [-l] [-s] [-i] [-a] [-x] [-e] [-p]
+              [-b <bank>|-r <startaddr>-<endaddr>] [-g <origin>]
+              [-d <width>] [-o <outfile>] <infile>
 Options: (numbers are hex-only, no prefixes)
- -n                Don't skip SMC header
- -h                HiROM memory mapping. Default is LoROM.
- -s                Use shadow ROM addresses (see above.)
+ -n                Skip $200 byte SMC header
+ -t                Don't output addresses/hex dump.
+ -h/-l             Force HiROM/LoROM memory mapping.
+ -s/-i             Force enable/disable shadow ROM addresses (see readme.)
  -a                Start in 8-bit accumulator mode. Default is 16-bit.
  -x                Start in 8-bit X/Y mode. Default is 16-bit.
- -d                Turn off bank-boundary enforcement (see above.)
+ -e                Turn off bank-boundary enforcement. (see readme.)
+ -p                Split subroutines by placing blank lines after RTS,RTL,RTI
  -b <bank>         Disassemble bank <bank> only. Overrides -r.
  -r <start>-<end>  Disassemble block from <start> to <end>.
                      Omit -<end> to disassemble to end of file.
- -g <origin>       Set origin of disassembled code (see above.)
- -o <outfile>      Set file to redirect output to. Default is to the screen.
+ -g <origin>       Set origin of disassembled code (see readme.)
+ -d <width>        No disassembly - produce a hexdump with <width> bytes/line.
+ -o <outfile>      Set file to redirect output to. Default is stdout.
  <infile>          File to disassemble.
 
 

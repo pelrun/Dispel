@@ -19,7 +19,7 @@ void usage(void)
 		"              [-b <bank>|-r <startaddr>-<endaddr>] [-g <origin>]\n"
 		"              [-d <width>] [-o <outfile>] <infile>\n\n"
 		"Options: (numbers are hex-only, no prefixes)\n"
-		" -n                Skip 0x200 byte SMC header\n"
+		" -n                Skip $200 byte SMC header\n"
 		" -t                Don't output addresses/hex dump.\n"
 		" -h/-l             Force HiROM/LoROM memory mapping.\n"
 		" -s/-i             Force enable/disable shadow ROM addresses (see readme.)\n"
