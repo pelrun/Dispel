@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall
+CFLAGS=-Wall -O2
 LDFLAGS=
 SOURCES=main.c 65816.c
 OBJECTS=$(SOURCES:.c=.o)
