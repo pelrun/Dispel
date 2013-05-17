@@ -7,31 +7,14 @@ by James Churchill of Naruto (C)2001
 
 pelrun@gmail.com
 
-The Problem
------------
+Latest windows binaries available to download from:
+https://drone.io/github.com/pelrun/Dispel/files
 
-[snip]
-
-Hi, pelrun from 2011 here. I wrote this document so long ago that I don't 
-think it's fair to leave my griping about the tools of the time still in
-this readme. It just boils down to one statement - what was available at
-the time had a bunch of quirks that made them difficult to use for SNES
-disassembly. So I wrote my own.
-
-The Solution
-------------
-
-And so I present DisPel, my own 65816 disassembler. It's not nearly as
+This is DisPel, my 65816 disassembler. It's not nearly as
 "full-featured" as Tracer (for instance, it's not really for use with NES
 roms), but it does everything I need it to. And since it only took a day to
 write (most of which was working on the commandline parser, not the
 disassembler itself!) I wonder why I didn't do it ages ago.
-
-The v0.9 is only because I haven't done exhaustive testing to ensure the
-disassembly is correct. But every piece of code I have disassembled with it
-matched exactly with code I've disassembled in the past (which was corrected
-by hand, of course!)
-
 
 Features
 --------
