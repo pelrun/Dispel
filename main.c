@@ -7,7 +7,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef __APPLE__
+#include <sys/uio.h>
+#else
 #include <io.h>
+#endif
 
 #include "dispel.h"
 
@@ -270,7 +275,13 @@ int main(int argc, char *argv[])
 	}
 
 	// Read the file into memory
+#ifdef __APPLE__
+	fseek(fin, 0L, SEEK_END);
+	len = ftell(fin);
+	fseek(fin, 0L, SEEK_SET);
+#else
 	len = filelength(fileno(fin));
+#endif
 
 	// Make sure the image is big enough
 
