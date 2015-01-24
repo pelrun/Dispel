@@ -11,7 +11,11 @@
 #ifdef __APPLE__
 #include <sys/uio.h>
 #else
+#ifdef __linux__
+#include <sys/io.h>
+#else
 #include <io.h>
+#endif
 #endif
 
 #include "dispel.h"
@@ -275,12 +279,12 @@ int main(int argc, char *argv[])
 	}
 
 	// Read the file into memory
-#ifdef __APPLE__
-	fseek(fin, 0L, SEEK_END);
+#if defined(__APPLE__) || defined(__linux__)
+	fseek(fin, 0L, SEEK_END); //Apple and linux code
 	len = ftell(fin);
 	fseek(fin, 0L, SEEK_SET);
 #else
-	len = filelength(fileno(fin));
+	len = filelength(fileno(fin)); //Windows code
 #endif
 
 	// Make sure the image is big enough
