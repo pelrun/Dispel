@@ -10,7 +10,8 @@
 
 #ifdef __APPLE__
 #include <sys/uio.h>
-#else
+#endif
+#ifdef _WIN32
 #include <io.h>
 #endif
 
@@ -275,7 +276,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Read the file into memory
-#ifdef __APPLE__
+#ifndef _WIN32
 	fseek(fin, 0L, SEEK_END);
 	len = ftell(fin);
 	fseek(fin, 0L, SEEK_SET);
