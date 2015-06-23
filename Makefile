@@ -21,9 +21,9 @@ $(EXECUTABLE): $(OBJECTS)
 .c.o:
 	$(CC) -c $(CFLAGS) $< -o $@
 install:
-	cp -v $(EXECUTABLE) /usr/bin
+	cp -v $(EXECUTABLE) /usr/local/bin
 	#FIXME It ALWAYS copies dispel to /usr/bin, regardless of OS
 uninstall:
-	rm -rf /usr/bin/$(EXECUTABLE)
+	rm -rf /usr/local/bin/$(EXECUTABLE)
 clean:
 	rm *.o ${EXECUTABLE}

@@ -11,7 +11,7 @@
 #ifdef __APPLE__
 #include <sys/uio.h>
 #else
-#ifdef __linux__
+#ifndef _WIN32
 #include <sys/io.h>
 #else
 #include <io.h>
@@ -279,7 +279,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Read the file into memory
-#if defined(__APPLE__) || defined(__linux__)
+#if !defined(_WIN32)
 	fseek(fin, 0L, SEEK_END); //Apple and linux code
 	len = ftell(fin);
 	fseek(fin, 0L, SEEK_SET);
@@ -327,6 +327,7 @@ int main(int argc, char *argv[])
 			hirom = 0;
 		}
 	}
+
 
 	// Unmangle the address options
 
