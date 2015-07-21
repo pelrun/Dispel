@@ -289,11 +289,6 @@ int main(int argc, char *argv[])
 
 	// Make sure the image is big enough
 
-	if (len < 0x10000 || (skip == 1 && len < 0x10200))
-	{
-		printf("This file looks too small to be a rom image.\n");
-		exit(1);
-	}
 
 	// Allocate mem for file. Extra 3 bytes to prevent segfault during memcpy
 	if ((data = malloc(len+3)) == NULL)
@@ -327,7 +322,11 @@ int main(int argc, char *argv[])
 			hirom = 0;
 		}
 	}
-
+	if ((!hirom&&(len < 0x8000 || (skip == 1 && len < 0x8200)))||(hirom&&(len < 0x10000 || (skip == 1 && len < 0x10200)))) //Check if ROM is big enough for current mapping
+	{
+		printf("This file looks too small to be a rom image.\n");
+		exit(1);
+	}
 
 	// Unmangle the address options
 
