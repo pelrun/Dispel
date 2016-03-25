@@ -286,10 +286,9 @@ int main(int argc, char *argv[])
 
 	// Make sure the image is big enough
 
-	if (len < 0x10000 || (skip == 1 && len < 0x10200))
+	if (len < 0x8000 || (skip == 1 && len < 0x8200))
 	{
-		printf("This file looks too small to be a rom image.\n");
-		exit(1);
+		printf("This file looks too small to be a legitimate rom image.\n");
 	}
 
 	// Allocate mem for file. Extra 3 bytes to prevent segfault during memcpy
