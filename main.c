@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef __APPLE__
+#ifndef _WIN32
 #include <sys/uio.h>
 #endif
 #ifdef _WIN32
