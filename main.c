@@ -10,9 +10,12 @@
 
 #ifdef __APPLE__
 #include <sys/uio.h>
-#endif
-#ifdef _WIN32
+#else
+#ifndef _WIN32
+#include <sys/io.h>
+#else
 #include <io.h>
+#endif
 #endif
 
 #include "dispel.h"
@@ -276,20 +279,16 @@ int main(int argc, char *argv[])
 	}
 
 	// Read the file into memory
-#ifndef _WIN32
-	fseek(fin, 0L, SEEK_END);
+#if !defined(_WIN32)
+	fseek(fin, 0L, SEEK_END); //Apple and linux code
 	len = ftell(fin);
 	fseek(fin, 0L, SEEK_SET);
 #else
-	len = filelength(fileno(fin));
+	len = filelength(fileno(fin)); //Windows code
 #endif
 
 	// Make sure the image is big enough
 
-	if (len < 0x8000 || (skip == 1 && len < 0x8200))
-	{
-		printf("This file looks too small to be a legitimate rom image.\n");
-	}
 
 	// Allocate mem for file. Extra 3 bytes to prevent segfault during memcpy
 	if ((data = malloc(len+3)) == NULL)
@@ -322,6 +321,11 @@ int main(int argc, char *argv[])
 //			fprintf(stderr,"Autodetected LoROM image.\n");
 			hirom = 0;
 		}
+	}
+	if ((!hirom&&(len < 0x8000 || (skip == 1 && len < 0x8200)))||(hirom&&(len < 0x10000 || (skip == 1 && len < 0x10200)))) //Check if ROM is big enough for current mapping
+	{
+		printf("This file looks too small to be a rom image.\n");
+		exit(1);
 	}
 
 	// Unmangle the address options
