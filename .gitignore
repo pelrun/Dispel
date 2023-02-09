@@ -1,3 +1,8 @@
 # ROMS
+# ROMs
 *.spc
+
+# Build files
+dispel
+*.o
 
